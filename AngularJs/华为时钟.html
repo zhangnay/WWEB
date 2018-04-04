@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<mete></mete>
+	<title>time colck</title>
+	<script type='text/javascript' src='jquery-1.11.1.min.js'></script>
+</head>
+<body>
+	<p id="runtime"></p>
+	<canvas id="canvas" width="500" height="500" style="border: solid 1px black;display: block;margin: 50px auto;">
+		Browser version not supported canvas！
+	</canvas>
+	<script>
+		window.onload=function load(){
+
+			var canvas=document.getElementById("canvas");
+			context=canvas.getContext("2d");
+
+			var x=250;var y=250;
+			var mx=250;var my=50;
+			var coordinate='coordinate';
+			var runtime=0;
+			var s=new Date();
+			var s1=s.getSeconds();
+			var news=s1;
+			var lins=2*news;
+			var maxp=0;var minp =0;
+			var maxi=1;var mini=4;
+
+
+			var myVar=setInterval(function(){
+				var time=new Date();
+				var h=time.getHours();
+				var m=time.getMinutes();
+				m=checkTime(m);
+
+				runtime++;
+				$("#runtime").text("运行时间："+runtime+"s");
+				//清除
+				context.clearRect(0,0,500,500);
+
+				//方块
+				//context.fillRect(x,y,20,20);
+				//context.stroke();
+
+				//线
+				//context.moveTo(50,0);
+				context.arc(x,y,240,0,1/30*Math.PI);
+
+				for (var i = 0; i<=360; i+=3) {
+					context.beginPath();
+					mtx=250+210*Math.cos(i*Math.PI/180);
+					mty=250+210*Math.sin(i*Math.PI/180);
+					ltx=250+230*Math.cos(i*Math.PI/180);
+					lty=250+230*Math.sin(i*Math.PI/180);
+					context.moveTo(mtx,mty);
+					context.lineTo(ltx,lty);
+					context.strokeStyle="black";
+					context.lineWidth=1;
+					context.stroke();
+				}
+
+				lins+=0.2;
+
+				mtx=250+230*Math.cos(3*(Math.round(lins)-30)*Math.PI/180);
+				mty=250+230*Math.sin(3*(Math.round(lins)-30)*Math.PI/180);
+				ltx=250+250*Math.cos(3*(Math.round(lins)-30)*Math.PI/180);
+				lty=250+250*Math.sin(3*(Math.round(lins)-30)*Math.PI/180);
+				context.moveTo(mtx,mty);
+				context.lineTo(ltx,lty);
+				context.strokeStyle="black";
+				context.lineWidth=1;
+				context.stroke();
+
+				for (var i = 0; i<=7; i++) {
+					mtx=250+230*Math.cos(3*(Math.round(lins)-30+i)*Math.PI/180);
+					mty=250+230*Math.sin(3*(Math.round(lins)-30+i)*Math.PI/180);
+					ltx=250+(250-i*3)*Math.cos(3*(Math.round(lins)-30+i)*Math.PI/180);
+					lty=250+(250-i*3)*Math.sin(3*(Math.round(lins)-30+i)*Math.PI/180);
+					context.moveTo(mtx,mty);
+					context.lineTo(ltx,lty);
+					context.strokeStyle="black";
+					context.lineWidth=1;
+					context.stroke();
+				}
+
+				for (var i = 0; i<=10; i++) {
+					mtx=250+230*Math.cos(3*(Math.round(lins)-30-i)*Math.PI/180);
+					mty=250+230*Math.sin(3*(Math.round(lins)-30-i)*Math.PI/180);
+					ltx=250+(250-i*3)*Math.cos(3*(Math.round(lins)-30-i)*Math.PI/180);
+					lty=250+(250-i*3)*Math.sin(3*(Math.round(lins)-30-i)*Math.PI/180);
+					context.moveTo(mtx,mty);
+					context.lineTo(ltx,lty);
+					context.strokeStyle="black";
+					context.lineWidth=1;
+					context.stroke();
+				}
+				//同心圆
+				if(runtime<200){
+					maxi+=0.1;
+					mini+=0.1;
+					if(maxp<1.5){
+						maxp+=0.1;
+					}
+					context.beginPath();
+					context.arc(x,y,250,maxi,maxp*Math.PI);
+					context.stroke();
+
+					if(minp<0.5){
+						minp+=0.1;
+					}
+					context.beginPath();
+					context.arc(x,y,210,mini,minp*Math.PI);
+					context.stroke();
+				}
+				
+				
+
+				news+=0.1;
+				mx=250+190*Math.cos(6*(news-15)*Math.PI/180);
+				my=250+190*Math.sin(6*(news-15)*Math.PI/180);
+
+				context.beginPath();
+				context.arc(mx,my,15,0,2*Math.PI);
+				context.strokeStyle="red";
+				context.fillStyle="red";
+				context.fill();
+				context.stroke();
+
+				coordinate='x:'+Math.round(x)+' y:'+Math.round(y);
+				mcoordinate='mx:'+Math.round(mx)+' my:'+Math.round(my);
+				mtcoordinate='mtx:'+Math.round(mtx)+' mty:'+Math.round(mty);
+				context.beginPath();
+				context.strokeStyle="black";
+				context.font="120px 宋体";
+				//context.strokeText("大圆圆心:"+coordinate,150,150);
+				//context.strokeText("小圆圆心:"+mcoordinate,150,100);
+				//context.strokeText("长线:"+mtcoordinate,150,125);
+
+
+				
+				context.strokeText(h+":"+m,100,290);
+				//context.strokeText(Math.round(news),250,250);
+
+
+			},100);
+		}
+
+		function checkTime(i)
+		{
+			if (i<10) 
+				{i="0" + i}
+			return i
+		}
+	</script>
+	
+	<p>1.500x500画布 黑色边框</p>
+	<p>2.边圆--使用两个同心圆确定刻度线位置 
+		使用x=x0+Math.cos();y=y0+Math.sin();
+		将角度转为弧度后填入（PI/180*角度）
+		算出各角度在圆上对应的点使用moveTO();lineTo();方法连线
+		再使用for循环可得刻度线 每3度一条线</p>
+		<p>3.坐标--使用坐标可以清晰看到数据的变化情况</p>
+		<p>4.获取时间并显示--获取时间以方便后续关联 
+			使用new Date();方法获取时间 使用getHours();等方法获取小时分秒</p>
+			<p>5.画小圆并关联秒数--以圆心上下左右正对位置 为小圆圆心画小圆 
+				根据圆心坐标以及小圆圆心到大圆圆心的距离为半径使用Math.cos();获取每3度的坐标
+				使用秒数适配度数（每0.1秒移动一次）
+			</p>
+			<p>6.边线并关联秒数 同上（每0.5秒移动一次 且与刻度线、小球同步) 
+				前7后7 for循环 
+				前：i越大离当前时间刻度线越远越短  后：i越大离当前时间刻度线越近越长</p>
+				<p>7.进入动画</p>
+				<p>8.美化</p>
+			</body>
+			</html>

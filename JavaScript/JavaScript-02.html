@@ -1,0 +1,52 @@
+<!DOCTYPE HTML> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<title>02</title> 
+
+<include file="yans.txt">
+<!-- 模板载入 -->
+<link href="resources/bootcss/3.3.5/css/bootstrap.min.css"
+    rel="stylesheet">
+<!-- <link href="css/base.css" rel="stylesheet"> -->
+      <script src="resources/Html5/3.7.2.js"></script>
+      <script src="resources/respond.js/1.4.2/1.4.2.js"></script>
+    <script src="resources/jquery/1.11.3/jquery.min.js"></script>
+    <script src="resources/bootcss/3.3.5/js/bootstrap.min.js"></script> 
+
+<script type="text/javascript" charset='utf-8'>
+        var cj=window.prompt("请输入成绩:","0");
+        
+        if(isNaN(cj)||cj<0||cj>100){
+        	alret('成绩有误');
+        }else{
+        	
+            switch(Math.floor((cj-50)/10))
+            {
+            case 1:
+                alret('差');
+                break;
+            case 2:
+                alret('中');
+                break;
+            case 3:
+                alret('良');
+                break;
+            case 4:
+                alret('优');
+                break;
+            case 5:
+                alret('学霸');
+                break;
+            default:
+                alret('不及格');
+            }
+        }
+</script>
+</head> 
+<body> 
+<p >JavaScript_02</p>
+
+
+</body>
+</html>

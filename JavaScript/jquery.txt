@@ -1,0 +1,87 @@
+<div id="product_shift_out_{m}"> </div>
+<script language = "JavaScript" type="text/javascript">
+$(document).ready(function(){
+name = $('div').eq(0).attr('id');
+alert(name)
+});
+</script>
+eq(0)是取第一个jq元素。。。
+eq(index)
+匹配一个给定索引值的元素
+Matches a single element by its index.
+返回值
+Element
+参数
+index (Number) : 从 0 开始计数
+示例
+查找第二行
+HTML 代码:
+复制代码 代码如下:
+
+<table>
+<tr><td>Header 1</td></tr>
+<tr><td>Value 1</td></tr>
+<tr><td>Value 2</td></tr>
+</table> 
+jQuery 代码:
+复制代码 代码如下:
+
+$("tr:eq(1)") 
+结果:
+复制代码 代码如下:
+
+[ <tr><td>Value 1</td></tr> ] 
+获取不同id的值
+复制代码 代码如下:
+<script src="js/jquery.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function(){
+var len = $("#group span").size();//获取span标签的个数
+var arr = [];
+for(var index = 0; index < len-1; index++){//创建一个数字数组
+arr[index] = index;
+}
+$.each(arr, function(i){//循环得到不同的id的值
+var idValue = $("#group span").eq(i).attr("id");
+if(idValue != ''){
+alert(idValue);
+}
+});
+});
+//-->
+</script>
+<span id="group">
+<span id="0_1">aaa,
+<span group_id="0_1" class="icon_close"> </span>
+</span>
+<span id="0_2">bbb,
+<span group_id="0_2" class="icon_close"> </span>
+</span>
+<span id="0_3">ccc,
+<span group_id="0_3" class="icon_close"> </span>
+</span>
+<span id="0_4">ddd,
+<span group_id="0_4" class="icon_close"> </span>
+</span>
+<span id="0_5">eee,
+<span group_id="0_5" class="icon_close"> </span>
+</span>
+</span>
+这样就会得到你想要的所有的id:
+0_1
+0_2
+0_3
+0_4
+0_5
+文本框，文本区域：
+复制代码 代码如下:
+
+$("#txt").attr("value",'');//清空内容
+$("#txt").attr("value",'11');//填充内容
+多选框checkbox：
+复制代码 代码如下:
+
+$("#chk1").attr("checked",'');//不打勾
+$("#chk2").attr("checked",true);//打勾
+if($("#chk1").attr('checked')==undefined) //判断是否已经打勾

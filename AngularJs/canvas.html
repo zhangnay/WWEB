@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+</head>
+<body>
+
+<canvas id="canvas" width="1024" height="768" style="border: solid 1px red;display: block;margin: 50px auto;">
+暂不支持此浏览器，请更换浏览器后再试！
+</canvas>
+<script >
+
+
+window.onload=function(){
+	var canvas=document.getElementById("canvas");
+    context=canvas.getContext("2d");
+    
+    context.moveTo(100,100);
+    context.lineTo(500,100);
+    context.lineTo(500,500);
+    context.lineTo(100,500);
+    context.lineTo(100,100);
+    context.strokeStyle="red";
+    context.lineWidth=5;
+    context.stroke();
+}
+
+</script>
+</body>
+</html>

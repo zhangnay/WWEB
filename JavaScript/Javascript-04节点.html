@@ -1,0 +1,73 @@
+<!DOCTYPE HTML> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<title>03</title> 
+
+<script src="resources/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" charset='utf-8'>
+    $(function(){
+        $('option').dblclick(function(event) {
+        	var id=$(this).parent()[0].id;
+        	
+        	if(id=='ul1'){
+        		$('#ul2').append('this');
+        	}
+        	else{
+        		$('#ul1').append('this');
+        	}
+        	//$('#ul1').append($('#ul2 this'));
+            //$('#ul2').append($('#ul1 option:selected'));
+        });
+    });
+
+    function tol(){
+    	$('#ul1').append($('#ul2 option:selected'));
+    }
+    function atol(){
+    	$('#ul1').append($('#ul2 option'));
+    }
+    function tor(){
+    	$('#ul2').append($('#ul1 option:selected'));
+    }
+    function ator(){
+    	$('#ul2').append($('#ul1 option'));
+    }
+    
+
+</script>
+</head> 
+<body> 
+
+<div style=" background-color:gray; float: left;">
+
+	<select id="ul1" multiple="multiple" style="width: 500px;height: 500px">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+    </select>
+	
+
+</div>
+
+<div style="width: 50px;  float: left;" >
+    <button style="width: 50px;" onclick="tor()" type="button">></button>
+    <button style="width: 50px;" onclick="ator()" type="button">>></butto>
+    <button style="width: 50px;" onclick="tol()" type="button"><</button>
+    <button style="width: 50px;" onclick="atol()" type="button"><<</butto>
+</div>
+
+<div style="width: 500px; background-color:gray; float: left;">
+<select id="ul2" multiple="multiple" style="width: 500px; height: 500px">
+        <option value="volvo">2Volvo</option>
+        <option value="saab">2Saab</option>
+        <option value="opel">2Opel</option>
+        <option value="audi">2Audi</option>
+    </select>
+</div>
+
+
+
+</body>
+</html>

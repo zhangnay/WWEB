@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+</head>
+<body>
+
+<canvas id="canvas" width="500" height="700" style="border: solid 1px red;display: block;margin: 50px auto;">
+暂不支持此浏览器，请更换浏览器后再试！
+</canvas>
+
+<script >
+window.onload=function(){
+    
+     
+
+    
+	var canvas=document.getElementById("canvas");
+    context=canvas.getContext("2d");
+
+    var speed=1;
+    var Score=0;
+    var num=7;
+
+    var load=[{x:350,y:250},{x:350,y:250},{x:350,y:250},{x:350,y:250}];
+    var colorchars=['#A98307','#F44611','#9B111E','#412227','#EA899A','#6C4675','#3E5F8A','#3F888F','#587246','#8E402A'];
+    var leftbar=new Array(30);
+    var rightbar=new Array(30);
+    for (i =0; i <= 30; i++) {
+        leftbar[i]=0;
+        rightbar[i]=0;
+    }
+
+    for (i=0;i<=num;i++){
+        leftbar[Math.floor(Math.random()*30)]=1;
+        rightbar[Math.floor(Math.random()*30)]=1;
+    }
+
+    var myVar=setInterval(function(){
+        context.clearRect(0,0,500,700);
+
+        //触顶死亡
+        if(load[0].y<=30&&load[0].y>=770){
+            //die('die')；
+        }
+
+
+        //触墙反向
+        if(load[0].x<=30&&load[0].x>=470){
+            if(load[0].x<=10&&load[0].x>=490){
+                speed=-speed;
+                Score++;
+                for (i=0;i<=num;i++){
+                    leftbar[Math.floor(Math.random()*30)]=1;
+                    rightbar[Math.floor(Math.random()*30)]=1;
+                }
+            }
+        }
+        
+        
+        //方向判断
+        if(speed>0){
+            load[0].x+=10;
+        }else{
+            load[0].x-=10;
+        }
+
+
+        //按键判断
+        document.onkeydown=function(event){
+        var e = event || window.event || arguments.callee.caller.arguments[0];   
+        if(e && e.keyCode==32){
+            load[0].y-=10;              
+        }
+    }; 
+
+        //持续下落
+        load[0].y+=10;
+
+
+        //重绘
+        for(i=0;i<=4;i++){
+
+            //load
+            context.beginPath();
+            context.arc(load[i].x,load[i].y,20-5*i,0,2*Math.PI);
+            c=Math.floor(Math.random()*10);
+            context.fillStyle=colorchars[c];
+            context.fill();
+
+            //左右墙
+            
+            leftbar[Math.floor(Math.random()*30)]=1;
+
+            //顶--底
+            context.beginPath();
+            context.moveTo(0,0);
+            for(i=1;i<=25;i++){
+                if(i%2==0){
+                    y=0;
+                }else{
+                    y=20;
+                }
+                context.lineTo(i*20,y);
+            }
+            context.strokeStyle="red";
+            context.lineWidth=2;
+
+            context.moveTo(0,700);
+            for(i=1;i<=25;i++){
+                if(i%2==0){
+                    y=700;
+                }else{
+                    y=680;
+                }
+                context.lineTo(i*20,y);
+            }
+            context.stroke();
+
+
+            //Score
+            context.beginPath();
+            context.font="35px Georgia ";
+            context.strokeText(Score,100,100);
+        }
+            
+        
+
+    },100);
+    context.stroke();
+}
+
+</script>
+</body>
+</html>

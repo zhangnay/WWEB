@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<mete></mete>
+	<title>MOVE</title>
+
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="1000" style="border: solid 1px red;display: block;margin: 50px auto;">
+		Browser version not supported canvas！
+	</canvas>
+	<script>
+		window.onload=function load(){
+
+			var canvas=document.getElementById("canvas");
+			context=canvas.getContext("2d");
+
+			var x=0;
+			var y=0;
+			var coordinate='coordinate';
+			var myVar=setInterval(function(){
+				context.clearRect(0,0,1000,1000);
+
+				context.fillRect(x,y,20,20);
+				context.stroke();
+				if(y<=1000){
+					x+=20;
+					if(x>=1000){
+						x=0;
+						y+=20;
+					}
+
+
+				}
+				coordinate='x:'+x+' y:'+y;
+				context.beginPath();
+				context.font="35px Georgia ";
+				context.strokeText(coordinate,100,100);
+
+
+			},100);
+
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+</head>
+<body>
+
+<canvas id="canvas" width="1024" height="768" style="border: solid 1px red;display: block;margin: 50px auto;">
+暂不支持此浏览器，请更换浏览器后再试！
+</canvas>
+<script >
+
+
+window.onload=function(){
+	var canvas=document.getElementById("canvas");
+    context=canvas.getContext("2d");
+
+    var arc=new Array();
+    var chars=new Array();
+    for (i =0; i <= 100; i++) {
+        chars[i]=(i+1)*10;
+    }
+
+    var colorchars=['#A98307','#F44611','#9B111E','#412227','#EA899A','#6C4675','#3E5F8A','#3F888F','#587246','#8E402A'];
+    for (i = 0; i <= 100; i++) {
+        id = Math.ceil(Math.random()*100);
+        res += chars[id];
+        id = Math.ceil(Math.random()*10);
+        arc[i]={x:res,y:10,color:colorchars[id]};
+    }
+
+    var myVar=setInterval(function(){
+        context.clearRect(0,0,1024,768);
+
+        for(i=0;i<=4;i++){
+            myTimer(arc[i]);
+        }
+        
+
+    },1000);
+
+    function myTimer(arcs)
+    {
+        context.beginPath();
+        context.arc(arcs.x,arcs.y,10,0,2*Math.PI);
+        context.fillStyle=arcs.color;
+        context.fill();
+    }
+}
+
+</script>
+</body>
+</html>

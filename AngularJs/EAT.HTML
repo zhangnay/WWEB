@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<mete></mete>
+	<title>EAT</title>
+
+</head>
+<body>
+	<canvas id="canvas" width="1000" height="500" style="border: solid 1px red;display: block;margin: 50px auto;">
+		Browser version not supported canvas！
+	</canvas>
+	<script>
+		window.onload=function load(){
+
+			var canvas=document.getElementById("canvas");
+			context=canvas.getContext("2d");
+
+			var x=100;
+			var y=300;
+			var coordinate='coordinate';
+
+			var jump=0;
+			var jumpnumber=0;
+			var myVar=setInterval(function(){
+				context.clearRect(0,0,500,1000);
+
+				context.fillRect(x,y,20,20);
+				context.stroke();
+				document.onkeydown=function(event){
+					var e = event || window.event || arguments.callee.caller.arguments[0];   
+					if(y>0||y<1000||x>0||x<500){
+						if(e && e.keyCode==32){
+							if(jumpnumber<2){
+								jump=1;
+								jumpnumber++;
+							}
+							
+						}
+					}
+				};
+
+				if(jump!=0){
+					jump++;
+					y-=5;
+				}else{
+					if(y<480){
+						y+=2;
+					}else{
+						jumpnumber=0;
+					}
+
+				}
+				if(jump>=10){
+					jump=0;
+				}
+
+				coordinate='x:'+x+' y:'+y;
+				context.beginPath();
+				context.font="35px Georgia ";
+				context.strokeText(coordinate,100,100);
+				context.strokeText('jump:'+jump,400,100);
+
+
+			},10);
+
+		}
+	</script>
+</body>
+</html>

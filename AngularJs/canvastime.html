@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+</head>
+<body>
+
+<canvas id="canvas" width="1024" height="768" style="border: solid 1px red;display: block;margin: 50px auto;">
+暂不支持此浏览器，请更换浏览器后再试！
+</canvas>
+
+<div id="div"></div>
+<script >
+
+
+window.onload=function(){
+	var canvas=document.getElementById("canvas");
+    context=canvas.getContext("2d");
+
+    var arc=new Array(100);
+    var chars=new Array();
+    for (i =0; i <= 100; i++) {
+        chars[i]=(i+1)*10;
+    }
+
+    var charsy=new Array();
+    for (i =0; i <= 20; i++) {
+        charsy[i]=(i+1)*10;
+    }
+
+    var colorchars=['#A98307','#F44611','#9B111E','#412227','#EA899A','#6C4675','#3E5F8A','#3F888F','#587246','#8E402A'];
+
+var demo=[{a:[{a_a1:"1",a_a2:"2"},{a_b1:"3",a_b2:"4"}],b:"b"},
+          {a:[{a_a1:"1",a_a2:"2"},{a_b1:"3",a_b2:"4"}],b:"b"}];
+
+        for (i = 0; i <= 100; i++) {
+           nx=Math.floor(Math.random()*100);
+           ny=Math.floor(Math.random()*20);
+           c=Math.floor(Math.random()*10);
+           d=Math.floor(Math.random()*2);
+           arc[i]={x:chars[nx],y:charsy[ny],color:colorchars[c],d:d,speed:1};
+        }
+
+         
+         
+    var myVar=setInterval(function(){
+        context.clearRect(0,0,1024,768);
+        
+        // d=new Date();
+        // arcs=acr[n].x+acr[n].y+acr[n].color;
+        // arcs=arc[n].color;
+        // context.font="20px Georgia";
+        // context.strokeText(d,10,50);
+         //context.strokeText(arc,10,100);
+         //context.strokeText(n,10,150);
+        
+        
+       //speed=time*0.98;
+        for(i=0;i<=100;i++){
+
+
+            if(arc[i].y>=758){
+                if(arc[i].speed<1.5&&arc[i].speed>-1.5){
+                    arc[i].speed=0;
+                    arc[i].y=758;
+                }else{
+                    arc[i].speed=0-arc[i].speed*0.7;
+                }
+                
+            }
+            
+            arc[i].y=arc[i].y+arc[i].speed;
+            arc[i].speed+=1;
+
+
+            
+
+            if(arc[i].x<1024&&0<arc[i].x){
+                if(arc[i].d==0){
+                    arc[i].x=arc[i].x-2;
+                }else{
+                    arc[i].x=arc[i].x+2;
+                }
+
+            }else{
+                nx=Math.floor(Math.random()*100);
+                ny=Math.floor(Math.random()*20);
+                arc[i].x=chars[nx];
+                arc[i].y=charsy[ny];
+                arc[i].speed=1;
+            }
+
+            context.beginPath();
+            context.arc(arc[i].x,arc[i].y,10,0,2*Math.PI);
+            context.fillStyle=arc[i].color;
+            context.fill();
+            
+            context.font="15px Georgia ";
+            context.strokeText(i,arc[i].x-6,arc[i].y+5);
+            context.strokeText(arc[2].speed,500,300);
+        }
+
+        
+
+    },100);
+    context.stroke();
+}
+
+</script>
+</body>
+</html>

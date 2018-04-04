@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="bootcss/css/bootstrap.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="bootcss/js/bootstrap.min.js"></script>
+	<style>
+		.center{
+			display: -webkit-flex;
+			-webkit-justify-content: center;
+			-webkit-align-items: center;
+		}
+		th{
+			text-align: center;
+		}
+
+	</style>
+</head>
+<body>
+	<div>
+	</div>
+	<div class="info">
+		<table class="table table-striped table-hover">
+			<thead class="header">
+				<tr>
+					<th>昵称</th><th>ID</th><th>电话</th><th>UID</th><th>状态</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- js -->
+			</tbody>
+		</table>
+	</div>
+
+
+	<div class="center" id="pages">
+		<div class=" glyphicon glyphicon-home btn btn-default" id="home"></div>
+		<div class=" glyphicon glyphicon-arrow-left btn btn-default"  id="left"></div>
+		<div class=" glyphicon glyphicon-arrow-right btn btn-default"  id="right"></div>
+	</div>
+	<script type="text/javascript">
+		var info=10;
+		var action_info=1;
+		var page=10;
+		var action_page=1;
+		var min=1;var max=5;
+
+		$(function(){
+			loadinfo(info,action_info);
+			loadpages(min,max);
+			active();
+			
+			$('#home').click(function(event) {
+				action_page=1;
+				range();
+				$('div').remove("#page");
+				loadpages(min,max);
+				active();
+			});
+			$('#left').click(function(event) {
+				action_page--;
+				range();
+				$('div').remove("#page");
+				loadpages(min,max);
+				active();
+			});
+			$('#right').click(function(event) {
+				action_page++;
+				range();
+				$('div').remove("#page");
+				loadpages(min,max);
+				active();
+			});
+			
+		});
+
+
+		
+		function range(){
+			if(action_page >= page - 2){
+				min=page-4;
+				max=page;
+			}else if(action_page>=3){
+				min=action_page-2;
+				max=action_page+2;
+			}
+		}
+
+		function active(){
+			if(action_page==1){
+					//alert(action_page);
+					$('#left').attr("disabled","true");
+					$('#home').attr("disabled","true");
+					$('#right').removeAttr('disabled');
+				}else if(action_page==page){
+					$('#right').attr("disabled","true");
+					$('#left').removeAttr('disabled');
+					$('#home').removeAttr('disabled');
+				}else{
+					//alert(action_page);
+					$('#left').removeAttr('disabled');
+					$('#right').removeAttr('disabled');
+					$('#home').removeAttr('disabled');
+				}
+			}
+
+			function loadinfo(infos,action_info){
+				for (var i=1; i <=infos; i++) {
+					if(action_info==i){
+						$('tbody').append('<tr class="success"><th>demo1</th><th>100001</th><th>12736340035</th><th>12345678912</th><th>未审核</th></tr>');
+					}else{
+						$('tbody').append('<tr><th>demo'+i+'</th><th>10000'+i+'</th><th>1273634003'+i+'</th><th>1234567891'+i+'</th><th>未审核</th></tr>');
+					}
+
+
+				// $('tbody').find('tr').eq(i).click(function(event) {
+				// 	alert('ss');
+				// 	$('tbody').find('tr').eq(i).css({
+				// 		'background-color': '#929292',
+				// 	});
+				// });
+			}
+		}
+
+
+		function loadpages(min,max){
+			var count=1;
+			for (var i=min; i <= max; i++) {
+				if(action_page==i){
+					$('#pages').find('div').eq(count).after('<div id="page" class=" btn btn-default btn-primary">'+i+'</div>');
+				}else{
+					$('#pages').find('div').eq(count).after('<div id="page" class=" btn btn-default ">'+i+'</div>');
+				}
+				count++;
+			}
+		}
+
+
+		function click_pages(){
+			action_page=0;
+			range();
+			$('div').remove("#page");
+			loadpages(min,max);
+			active();
+		}
+	</script>
+</body>
+</html>

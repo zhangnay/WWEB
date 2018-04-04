@@ -1,0 +1,35 @@
+<!DOCTYPE HTML> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<title>03</title> 
+
+<script src="resources/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" charset='utf-8'>
+    $(function(){
+        $('div[title]').css('background-color','#bbffaa');
+        $('div[title="test"]').css('background-color','#bbffaa');
+        $('div[title!="test"]').css('background-color','#bbffaa');
+        $('div[title^="te"]').css('background-color','#bbffaa');
+        $('div[title$="est"]').css('background-color','#bbffaa');
+        $('div[title*="es”]').css('background-color','#bbffaa');
+        $('div[id][title*="es"]').css('background-color','#bbffaa');
+
+    });
+    
+</script>
+</head> 
+<body> 
+
+<div title="">div</div>
+<div title="test">div</div>
+<div title="tttt">div</div>
+<div title="tess">div</div>
+<div title="ssest">div</div>
+<div title="tttestt">div</div>
+<div id='' title="eess">div</div>
+
+
+
+</body>
+</html>

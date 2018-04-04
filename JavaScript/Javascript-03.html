@@ -1,0 +1,83 @@
+<!DOCTYPE HTML> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<title>03</title> 
+
+<script src="resources/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" charset='utf-8'>
+    $(function(){
+
+        //单击弹出提示框
+         $('p').click(function(event) {
+            alert('你点击了一行文字');
+        });
+
+        //隔行换色
+        $("p:first").css('background-color',"green");
+        $("p:gt(0):even").css('background-color',"blue");
+        $("p:gt(0):odd").css('background-color',"yellow"); 
+
+        //鼠标悬停换色
+        $('p:gt(0)').mouseenter(function(){
+            $(this).css('background-color','white');
+        });
+        $('p').mouseout(function(){
+            $("p:gt(0):even").css('background-color',"blue");
+            $("p:gt(0):odd").css('background-color',"yellow"); 
+        });
+
+        //统计复选框
+        $('#b').click(function(event) {
+            c=$('input');
+            var i;
+            $.each(c,function(index, v) {
+
+                if($('v').prop('checked')=="ture"){
+                    i++;
+                }
+            });
+            alert(i);
+        });
+
+
+        //遍历数组
+        var sz=[1,2,3,4,[5,[6,7],8,9],10,11];
+        $('#bl').click(function(event) {
+            function e(sz){
+                $.each(sz,function(index, v) {
+                    if(isArray(v)){
+                        e(v);
+                    }else{
+                        alert(v);
+                    }
+                });
+            }
+        });
+
+
+    });
+    
+</script>
+</head> 
+<body> 
+
+<input type=checkbox />1
+<input type=checkbox />2
+<input type=checkbox />3
+<input type=checkbox />4
+<input type=checkbox />5
+<input type=checkbox />6
+<button id="b" type=button value="查看">查看</button>
+<button id="b1" type=button value="遍历数组">遍历数组</button>
+
+
+<p>单击文字弹框！</p>
+<p>JavaScript_03</p>
+<p>JavaScript_031</p>
+<p>JavaScript_032</p>
+
+
+
+</body>
+</html>

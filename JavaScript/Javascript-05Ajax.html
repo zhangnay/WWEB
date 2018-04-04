@@ -1,0 +1,81 @@
+<!DOCTYPE HTML> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<title>05_Ajax</title> 
+
+
+
+    <link href="resources/bootcss/3.3.5/css/bootstrap.min.css"
+    rel="stylesheet">
+
+    <script src="resources/Html5/3.7.2.js"></script>
+    <script src="resources/respond.js/1.4.2/1.4.2.js"></script>
+    <script src="resources//3.1.1.js"></script>
+    <script src="resources/bootcss/3.3.5/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" charset='utf-8'>
+    $(function(){
+
+    	$.ajax({
+    		url: 'Provinces.xml',
+    		type: 'get',
+    		dataType: 'xml',
+    		data: {param1: 'value1'},
+    	})
+    	.done(function(result) {
+    		
+    		var res=$(result).find('Province');
+    		
+         	$('res').each(function(k, v) {
+     	
+         		var id=$(v)[0].id;
+         		var Pro=$(v).attr('ProvinceName');
+         		$('#sheng').append('<option value='+id+'>'+Pro+'</option>')
+         	});
+
+    	})
+    	.fail(function() {
+    		console.log("error");
+    	})
+    	.always(function() {
+    		//console.log("complete");
+    	});
+    	
+
+
+
+        // $.get('Provinces.xml', function(result) {
+        // 	var res=$(result).find('Province');
+
+        // 	$.each('res',function(index, el) {
+        // 		var id=$(el).attr('id');
+        // 		var ProvinceName=$(el).attr('ProvinceName');
+        // 		$('#sheng').append('<option value='+id+'>'+ProvinceName+'</option>')
+        // 	});
+        	
+        // },'xml');
+        
+    });
+    
+</script>
+</head> 
+<body> 
+<select id="sheng" style="width: 300px;height: 40px;font-size: 24px">
+  <option>请选择省份</option>
+</select>
+
+<select id="shi" style="width: 300px;height: 40px;font-size: 24px">
+  <option>请选择城市</option>
+</select>
+
+<select id="qu" style="width: 300px;height: 40px;font-size: 24px">
+  <option>请选择区县</option>
+</select>
+
+
+
+
+</body>
+</html>

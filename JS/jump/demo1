@@ -1,0 +1,6 @@
+<script>
+function QRcode(){
+ var div = document.getElementsByTagName('qrimg')[0];
+　 alert(div.style.width);
+   //alert("sss");
+}
