@@ -1,0 +1,19 @@
+两个form表单
+<form name="form1" action="" method="post">  
+   .....  
+   <button id="button1" type="submit"></button>  
+   <button id="button2" type="submit"></button>  
+</form>  
+<script>  
+        $(document).ready(function(){  
+            $("#button1").click(function(){  
+                  
+                $("#draw").attr("action","url1");   
+                $("form").submit();  
+            });  
+            $("#button2").click(function(){  
+                  
+                $("#draw").attr("action","url2");   
+                $("form").submit();  
+            });  
+</script>  
