@@ -1,0 +1,6 @@
+刚开始实习：HTML+css+js基础标签很多都记不住  php+mysql+apcahe项目环境搭建
+bootstrap
+牛客网的前端知识
+
+微信公众号接口
+百度识字SDk  
